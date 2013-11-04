@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Tempo | The Elegant Speed Reader</title>
+	
+	<link rel="stylesheet" type="text/css" href="stylesheet.css"></link>
+	<link rel="stylesheet" type="text/css" href="dragdealer.css"></link>
+	<script src="jquery-1.10.2.min.js"></script>
+	<script src="dragdealer.js"></script>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<p class="reader"></p>
+	
+	<div class="controls">
+		<div class="main">
+			<div id="progress" class="dragdealer">
+				<div class="handle">Progress</div>
+			</div>
+	
+			<button class="play">Play</button>
+			<button class="rewind">Rewind</button>
+			<button class="toggle">Toggle Loader</button>
+		
+			<div id="speed" class="dragdealer">
+				<div class="handle">Speed</div>
+			</div>
+		</div>
+	
+		<div class="loader">
+			<textarea class="text" rows="20" cols="50"></textarea>
+			<br />
+			<button class="load">Load</button>
+		</div>
+	</div>
+	
+	<div class="window">
+		<p class="scroller"></p>
+	</div>
+	
+	<script src="script.js"></script>
+</body>
+</html>

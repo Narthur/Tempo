@@ -1,0 +1,64 @@
+.reader {
+	margin:150px auto 50px auto;
+	font-size:100px;
+	width:100%;
+	height:100px;
+	text-align:center;
+	color:#222;
+}
+
+.controls, .main {
+	margin:0 auto;
+	display:table;
+	font-family: 'Lucida Grande', san-serif;
+	font-size:11px;
+}
+
+.loader {
+	display:none;
+}
+
+button {
+	background-color:lightgrey;
+	color:#EEE;
+	border:none;
+	line-height:10px;
+	cursor: pointer;
+}
+
+.play {
+	width: 43px;
+}
+
+.controls .dragdealer, button {
+	height:15px;
+	margin:3px 2px;
+	border-radius:4px;
+}
+
+.controls .dragdealer {
+	width:190px;
+}
+
+.handle {
+	background-color:lightgrey;
+	height:100%;
+	color:#EEE;
+	padding:0 8px 0 5px;
+	border-radius:4px;
+	font-style:italic;
+}
+
+.scroller {
+	white-space: nowrap;
+	position:absolute;
+	font-size:100px;
+	margin-top:0;
+}
+
+.window {
+	width:100%;
+	overflow:hidden;
+	position:relative;
+	height:120px;
+}
