@@ -1,5 +1,4 @@
 var i, paused, words, speed, text;
-speed = .7;
 
 var speedSlider = new Dragdealer('speed', {
 	x: .7,
@@ -11,6 +10,7 @@ function initializeReader() {
 
 	if (text == undefined && localStorage.getItem('text') == null) {
 		text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
+		i = 0;
 	} else if (text == undefined) {
 		text = localStorage.getItem('text');
 		i = localStorage.getItem('progress');
@@ -104,7 +104,7 @@ function pause() {
 function rewind() {
 	pause();
 	i = 0;
-	updateProgress()
+	updateProgress();
 }
 
 function togglePlayPause() {
@@ -127,7 +127,8 @@ $('.load').click(function() {
 	pause()
 	text = $('.text').val();
 	$('.loader').hide("slow");
-	initializeReader()
+	initializeReader();
+	rewind();
 });
 
 $('.toggle').click(function() {
@@ -142,7 +143,7 @@ $(document).keydown(function(e) {
 				break;
 		
 			case 32: // space
-				togglePlayPause()
+				togglePlayPause();
 				break;
 		
 			case 37: // left
