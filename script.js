@@ -7,15 +7,20 @@ var speedSlider = new Dragdealer('speed', {
 
 function initializeReader() {
 	pause();
-
-	if (text == undefined && localStorage.getItem('text') == null) {
+	
+	if (localStorage == undefined) {
 		text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
 		i = 0;
-	} else if (text == undefined) {
-		text = localStorage.getItem('text');
-		i = localStorage.getItem('progress');
 	} else {
-		localStorage.setItem('text', text);
+		if (text == undefined && localStorage.getItem('text') == null) {
+			text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
+			i = 0;
+		} else if (text == undefined) {
+			text = localStorage.getItem('text');
+			i = localStorage.getItem('progress');
+		} else {
+			localStorage.setItem('text', text);
+		}
 	}
 	
 	words = text.split(/[\s-–—]+/);
