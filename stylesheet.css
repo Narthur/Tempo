@@ -1,6 +1,23 @@
+body, html {
+	height:100%;
+}
+
+.floater {
+	float:left;
+	height:43%;
+	margin-bottom:-108px;
+}
+
+.content {
+	clear:both;
+	height:216px;
+	position:relative;
+}
+
 .reader {
-	margin:150px auto 50px auto;
+	margin:0 auto 50px auto;
 	font-size:100px;
+	font-family:Times, 'Times New Roman', serif;
 	width:100%;
 	height:100px;
 	text-align:center;
@@ -10,7 +27,7 @@
 .controls, .main {
 	margin:0 auto;
 	display:table;
-	font-family: 'Lucida Grande', san-serif;
+	font-family: 'Lucida Grande', sans-serif;
 	font-size:11px;
 }
 
@@ -37,7 +54,7 @@ button {
 }
 
 .controls .dragdealer {
-	width:190px;
+	width:189px;
 }
 
 .handle {
@@ -47,18 +64,4 @@ button {
 	padding:0 8px 0 5px;
 	border-radius:4px;
 	font-style:italic;
-}
-
-.scroller {
-	white-space: nowrap;
-	position:absolute;
-	font-size:100px;
-	margin-top:0;
-}
-
-.window {
-	width:100%;
-	overflow:hidden;
-	position:relative;
-	height:120px;
 }

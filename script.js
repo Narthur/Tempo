@@ -18,7 +18,7 @@ function initializeReader() {
 		localStorage.setItem('text', text);
 	}
 	
-	words = text.split(' ');
+	words = text.split(/[\s-–—]+/);
 	steralizeText();
 	length = words.length;
 	$('.text').val(text);
@@ -147,7 +147,11 @@ $(document).keydown(function(e) {
 				break;
 		
 			case 37: // left
-				i = i - 10;
+				if (i >= 10) {
+					i = i - 10;
+				} else {
+					i = 0;
+				}
 				if (paused) updateProgress();
 				break;
 
@@ -156,7 +160,11 @@ $(document).keydown(function(e) {
 				break;
 
 			case 39: // right
-				i = i + 10;
+				if (i <= length - 10) {
+					i = i + 10;
+				} else {
+					i = length;
+				}
 				if (paused) updateProgress();
 				break;
 
@@ -174,17 +182,10 @@ initializeReader();
 
 /*
 ToDo:
-Add splitting by new line characters
-Define font-family: Times, serif;
-Check sans-serif syntax
 Add full-screen mode
 Make it automatically remove page numbers
-Fix jump back and forward
-Try making a scrolling version
-Make layout responsive:
-	Controls fastened bottom-center
-	Loader pop-up
-	Text centered vertically & horizontally
+Make loader pop-up
+Fix last word shutter
 */
 
 
