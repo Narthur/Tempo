@@ -8,31 +8,38 @@ var speedSlider = new Dragdealer('speed', {
 function initializeReader() {
 	pause();
 	
-	if (localStorage == undefined) {
-		text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
-		i = 0;
+	if (text == undefined) {
+		loadText();
 	} else {
-		if (text == undefined && localStorage.getItem('text') == null) {
-			text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
-			i = 0;
-		} else if (text == undefined) {
-			text = localStorage.getItem('text');
-			i = localStorage.getItem('progress');
-		} else {
-			localStorage.setItem('text', text);
-		}
+		saveText();
 	}
 	
-	words = text.split(/[\s-–—]+/);
-	steralizeText();
-	length = words.length;
-	$('.text').val(text);
-	$('.reader').html(words[i]);
+	prepareWords();
+	loadIntoPage();
 	updateProgress();
 	speedSlider.setValue(speed);
 }
 
-function steralizeText() {
+function loadText() {
+	if (localStorage == undefined || localStorage.getItem('text') == null) {
+		text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
+		i = 0;
+	} else {
+		text = localStorage.getItem('text');
+		i = localStorage.getItem('progress');
+	}
+}
+
+function saveText() {
+	if (localStorage != undefined) localStorage.setItem('text', text);
+}
+
+function prepareWords() {
+	words = text.split(/[\s-–—]+/);
+	steralizeWords();
+}
+
+function steralizeWords() {
 	var bannedCharacters = [' ', '{', '}'];
 	
 	for (k = 0; k < bannedCharacters.length; k++) {
@@ -50,13 +57,16 @@ function steralizeText() {
 			j--;
 		}
 	}
-	
-	length = words.length;
+}
+
+function loadIntoPage() {
+	$('.text').val(text);
+	$('.reader').html(words[i]);
 }
 
 function updateProgress() {
-	progress.setValue(i / length);
-	localStorage.setItem('progress', i);
+	progress.setValue(i / words.length);
+	if (localStorage != undefined) localStorage.setItem('progress', i);
 }
 
 
@@ -64,13 +74,13 @@ var width = $('.scroller').width()
 var progress = new Dragdealer('progress', {
 	animationCallback: function(value) {
 		if (paused) {
-			i = Math.round(value * length);
+			i = Math.round(value * words.length);
 			$('.reader').html(words[i]);
 		}
 	},
 	callback: function(value) {
 		if (!paused) {
-			i = Math.round(value * length);
+			i = Math.round(value * words.length);
 			$('.reader').html(words[i]);
 		}
 	}
@@ -79,7 +89,7 @@ var progress = new Dragdealer('progress', {
 function play() {
 	paused = false;
 	$('.play').html('Pause');
-	if (i == length) i = 0;
+	if (i == words.length) i = 0;
 	step();
 }
 
@@ -93,7 +103,7 @@ function step() {
 		} else {
 			return;
 		}
-		if (i < length) {
+		if (i < words.length) {
 			step();
 		} else {
 			pause();
@@ -165,10 +175,10 @@ $(document).keydown(function(e) {
 				break;
 
 			case 39: // right
-				if (i <= length - 10) {
+				if (i <= words.length - 10) {
 					i = i + 10;
 				} else {
-					i = length;
+					i = words.length;
 				}
 				if (paused) updateProgress();
 				break;
