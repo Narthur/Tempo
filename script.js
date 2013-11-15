@@ -69,8 +69,6 @@ function updateProgress() {
 	if (localStorage != undefined) localStorage.setItem('progress', i);
 }
 
-
-var width = $('.scroller').width()
 var progress = new Dragdealer('progress', {
 	animationCallback: function(value) {
 		if (paused) {
@@ -90,25 +88,18 @@ function play() {
 	paused = false;
 	$('.play').html('Pause');
 	if (i == words.length) i = 0;
-	step();
+	loadNextWord();
 }
 
-function step() {
-	if (paused) return;
-	setTimeout(function() {
-		if (!paused) {
-			$('.reader').html(words[i]);
-			i++;
-			updateProgress();
-		} else {
-			return;
-		}
-		if (i < words.length) {
-			step();
-		} else {
-			pause();
-		}
-	}, ((1 - speed) * 300) + 100);
+function loadNextWord() {
+	var delay = ((1 - speed) * 300) + 100;
+	
+	$('.reader').html(words[i]);
+	i++;
+	updateProgress();
+	
+	if (i >= words.length) setTimeout(pause, delay);
+	if (!paused) setTimeout(loadNextWord, delay);
 }
 
 function pause() {
