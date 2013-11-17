@@ -87,17 +87,16 @@ var progress = new Dragdealer('progress', {
 function play() {
 	paused = false;
 	$('.play').html('Pause');
-	if (i == words.length) i = 0;
+	if (i >= words.length) i = 0;
 	loadNextWord();
 }
 
 function loadNextWord() {
 	var delay = ((1 - speed) * 300) + 100;
-	
+	if (paused) return;
 	$('.reader').html(words[i]);
 	i++;
 	updateProgress();
-	
 	if (i >= words.length) setTimeout(pause, delay);
 	if (!paused) setTimeout(loadNextWord, delay);
 }
@@ -114,20 +113,12 @@ function rewind() {
 }
 
 function togglePlayPause() {
-	if (paused) {
-		play();
-	} else {
-		pause();
-	}
+	if (paused) { play() } else { pause() }
 }
 
-$('.play').click(function() {
-	togglePlayPause();
-});
+$('.play').click(togglePlayPause);
 
-$('.rewind').click(function() {
-	rewind();
-});
+$('.rewind').click(rewind);
 
 $('.load').click(function() {
 	pause()
@@ -158,7 +149,7 @@ $(document).keydown(function(e) {
 				} else {
 					i = 0;
 				}
-				if (paused) updateProgress();
+				updateProgress();
 				break;
 
 			case 38: // up
@@ -171,7 +162,7 @@ $(document).keydown(function(e) {
 				} else {
 					i = words.length;
 				}
-				if (paused) updateProgress();
+				updateProgress();
 				break;
 
 			case 40: // down
@@ -191,7 +182,6 @@ ToDo:
 Add full-screen mode
 Make it automatically remove page numbers
 Make loader pop-up
-Fix last word shutter
 */
 
 
