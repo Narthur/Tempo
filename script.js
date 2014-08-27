@@ -22,7 +22,33 @@ function initializeReader() {
 
 function loadText() {
 	if (localStorage == undefined || localStorage.getItem('text') == null) {
-		text = 'The greatest want of the world is the want of men--men who will not be bought or sold, men who in their inmost souls are true and honest, men who do not fear to call sin by its right name, men whose conscience is as true to duty as the needle to the pole, men who will stand for the right though the heavens fall.  {Ed 57.3}'
+		text =
+
+['Two roads diverged in a yellow wood,',
+'And sorry I could not travel both',
+'And be one traveler, long I stood',
+'And looked down one as far as I could',
+'To where it bent in the undergrowth;',
+
+'Then took the other, as just as fair,',
+'And having perhaps the better claim,',
+'Because it was grassy and wanted wear;',
+'Though as for that the passing there',
+'Had worn them really about the same,',
+ 
+'And both that morning equally lay',
+'In leaves no step had trodden black.',
+'Oh, I kept the first for another day!',
+'Yet knowing how way leads on to way,',
+'I doubted if I should ever come back.',
+
+'I shall be telling this with a sigh',
+'Somewhere ages and ages hence:',
+'Two roads diverged in a wood, and I—',	
+'I took the one less traveled by,',
+'And that has made all the difference.',
+'— Robert Frost'].join('\n');
+
 		i = 0;
 	} else {
 		text = localStorage.getItem('text');
